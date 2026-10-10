@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Options 101: The Deal Lab | Block Wall Street</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0A1128;--navy2:#101A38;--navy3:#182448;--gold:#D4AF37;--gold2:#F0C64C;--green:#4CC98A;--red:#E06666;--text:#E8ECF5;--muted:#A7B2CE;--line:rgba(212,175,55,.25)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--navy);color:var(--text);font-family:'Barlow',system-ui,sans-serif;font-size:18px;line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header.hero{padding:56px 0 40px;background:radial-gradient(ellipse at top,#182448 0%,#0A1128 70%);border-bottom:1px solid var(--line)}
+.eyebrow{font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase}
+h1{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(46px,9vw,92px);line-height:.96;margin:8px 0 14px;letter-spacing:.01em}
+h1 span{color:var(--gold2)}
+h2{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:clamp(34px,5.5vw,50px);margin:0 0 6px;letter-spacing:.02em;color:var(--gold2);line-height:1.05}
+h3{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:26px;margin:0 0 6px;letter-spacing:.03em;color:var(--text)}
+p{margin:0 0 12px}
+.lead{color:var(--muted);max-width:760px;font-size:20px}
+nav.top{position:sticky;top:0;z-index:20;background:rgba(10,17,40,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav.top .wrap{display:flex;gap:2px;overflow-x:auto;padding:0 10px}
+nav.top a{color:var(--muted);text-decoration:none;font-family:'DM Mono',monospace;font-size:13px;padding:14px 12px;white-space:nowrap}
+nav.top a:hover{color:var(--gold2)}
+section{padding:54px 0 8px;scroll-margin-top:48px}
+.step{font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;margin-bottom:2px}
+.panel{background:var(--navy2);border:1px solid var(--line);border-radius:12px;padding:20px;margin:16px 0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:16px 0}
+.card{background:var(--navy2);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.card h3{color:var(--gold2)}
+.card .say{font-family:'DM Mono',monospace;font-size:13px;color:var(--muted);margin-top:6px}
+.note{border-left:4px solid var(--gold);background:var(--navy3);padding:12px 16px;border-radius:0;margin:14px 0}
+.note b{color:var(--gold2)}
+.big{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,5vw,44px);letter-spacing:.02em;text-align:center;line-height:1.15;margin:6px 0}
+.big em{font-style:normal;color:var(--gold2)}
+.big .g{color:var(--green)}
+.field{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.field label{font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+.field small{color:var(--muted);font-size:14px}
+input[type=number]{background:var(--navy);border:1px solid var(--line);color:var(--text);padding:10px 12px;border-radius:6px;font-family:'DM Mono',monospace;font-size:17px;width:100%}
+input[type=number]:focus{outline:2px solid var(--gold);outline-offset:1px}
+input[type=range]{width:100%;accent-color:var(--gold);height:30px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{background:var(--navy);color:var(--muted);border:0;padding:10px 20px;font-family:'DM Mono',monospace;font-size:15px;cursor:pointer}
+.seg button.on{background:var(--gold);color:var(--navy);font-weight:500}
+.btn{background:var(--navy3);color:var(--gold2);border:1px solid var(--line);border-radius:6px;padding:8px 14px;font-family:'DM Mono',monospace;font-size:13px;cursor:pointer}
+.btn:hover{border-color:var(--gold)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:12px}
+.stat{background:var(--navy);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.stat .k{font-family:'DM Mono',monospace;font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.stat .v{font-family:'DM Mono',monospace;font-size:22px;margin-top:2px}
+.stat .h{font-size:13.5px;color:var(--muted);line-height:1.35;margin-top:2px}
+.pos{color:var(--green)!important}.neg{color:var(--red)!important}
+.badge{display:inline-block;padding:5px 14px;border-radius:999px;font-family:'DM Mono',monospace;font-size:14px;font-weight:500}
+.itm{background:rgba(76,201,138,.16);color:var(--green);border:1px solid var(--green)}
+.otm{background:rgba(167,178,206,.14);color:#C9D2EA;border:1px solid #7C89AB}
+.atm{background:rgba(240,198,76,.16);color:var(--gold2);border:1px solid var(--gold2)}
+.split{display:flex;height:34px;border-radius:6px;overflow:hidden;border:1px solid var(--line);margin:8px 0 6px;background:var(--navy)}
+.split div{display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;color:var(--navy);white-space:nowrap;overflow:hidden}
+.bi{background:var(--green)}.bt{background:var(--gold2)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;color:var(--muted);margin:6px 0}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px}
+svg{width:100%;height:auto;display:block}
+.sv-t{fill:var(--text);font:500 13px 'DM Mono',monospace}
+.sv-m{fill:var(--muted);font:12px 'DM Mono',monospace}
+.sv-g{fill:var(--gold2);font:500 13px 'DM Mono',monospace}
+.grid{stroke:rgba(167,178,206,.16);stroke-width:1}
+.ax0{stroke:rgba(232,236,245,.55);stroke-width:1.2}
+.tick{stroke:rgba(167,178,206,.5);stroke-width:1}
+.err{color:var(--red);font-size:15px;min-height:20px}
+.tblwrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-family:'DM Mono',monospace;font-size:15px}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);text-align:right;padding:10px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{text-align:right;padding:10px 10px;border-bottom:1px solid rgba(212,175,55,.1);white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+tr.near td{background:rgba(240,198,76,.07)}
+tr.near td:first-child{border-left:3px solid var(--gold2)}
+.q{background:var(--navy2);border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}
+.q .qt{font-weight:600;margin-bottom:10px}
+.opt{display:block;width:100%;text-align:left;background:var(--navy);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:11px 14px;margin:7px 0;font-family:'Barlow',sans-serif;font-size:17px;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--gold)}
+.opt.right{border-color:var(--green);background:rgba(76,201,138,.14)}
+.opt.wrong{border-color:var(--red);background:rgba(224,102,102,.14)}
+.opt:disabled{cursor:default;color:var(--text)}
+.why{margin-top:8px;color:var(--muted);font-size:16px}
+.score{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--gold2)}
+.formula{font-family:'DM Mono',monospace;font-size:15px;background:var(--navy);border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:8px 0}
+.formula b{color:var(--gold2);font-weight:500}
+ul.clean{margin:8px 0;padding-left:22px}
+ul.clean li{margin:6px 0}
+footer{margin-top:56px;padding:28px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
+@media (max-width:560px){body{font-size:17px}.panel{padding:14px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Block Wall Street &middot; Options Lab</div>
+    <h1>Options 101:<br><span>The Deal Lab</span></h1>
+    <p class="lead">An option is just a deal you lock in today and decide on later. In this page you will play with real numbers from an Ethereum (ETH) options chain on Derive and learn what &ldquo;in the money,&rdquo; &ldquo;out of the money,&rdquo; &ldquo;premium,&rdquo; and &ldquo;delta&rdquo; actually mean. No math background needed.</p>
+    <div class="chips">
+      <span class="badge atm">ETH price: $2,487.30</span>
+      <span class="badge atm">Deadline: Dec 25</span>
+      <span class="badge atm">Snapshot: Oct 9, 2026</span>
+    </div>
+  </div>
+</header>
+
+<nav class="top"><div class="wrap">
+  <a href="#story">1. Story</a><a href="#words">2. Words</a><a href="#lab1">3. Zones lab</a><a href="#lab2">4. Profit lab</a><a href="#lab3">5. Time lab</a><a href="#chain">6. Real prices</a><a href="#quiz">7. Quiz</a><a href="#cheat">8. Cheat sheet</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="story">
+  <div class="step">Part 1</div>
+  <h2>The sneaker deal</h2>
+  <p class="lead">Before any crypto, here is the whole idea with a pair of sneakers.</p>
+  <div class="panel">
+    <p>A store sells a hot sneaker for <b>$100</b>. You think the price will jump soon. The store says: <i>&ldquo;Pay me <b>$10</b> today and I promise you can buy it for $100 any time before the deadline, even if the price goes up.&rdquo;</i></p>
+    <p>That $10 is not refundable. That promise is an <b>option</b>. Drag the slider to see what the sneaker costs at the deadline.</p>
+    <div class="field">
+      <label for="sn-px">Sneaker price in stores at the deadline</label>
+      <input type="range" id="sn-px" min="40" max="200" step="1" value="140">
+    </div>
+    <div class="big" id="sn-big"></div>
+    <p id="sn-txt" style="text-align:center;color:var(--muted)"></p>
+  </div>
+  <div class="note"><b>The big lesson:</b> the most you can ever lose is the $10 deposit. But you do not make money until the sneaker passes <b>$110</b> ($100 locked-in price + $10 deposit). Keep that &ldquo;locked-in price plus deposit&rdquo; idea. It shows up everywhere below.</div>
+</section>
+
+<section id="words">
+  <div class="step">Part 2</div>
+  <h2>Six words to know</h2>
+  <p class="lead">Every option uses the same few words. Here they are in plain English next to the sneaker deal.</p>
+  <div class="cards">
+    <div class="card"><h3>Spot price</h3><p>The price of ETH right now.</p><div class="say">Sneaker: what the store charges today.</div></div>
+    <div class="card"><h3>Strike price</h3><p>The locked-in price written in your deal.</p><div class="say">Sneaker: the $100.</div></div>
+    <div class="card"><h3>Premium</h3><p>What you pay up front for the deal. If it goes badly, this is the most you can lose.</p><div class="say">Sneaker: the $10 deposit.</div></div>
+    <div class="card"><h3>Expiry</h3><p>The deadline. On Derive, options end at 8:00 a.m. UTC. In December that is 2:00 a.m. Chicago time.</p><div class="say">Sneaker: the last day of the deal.</div></div>
+    <div class="card"><h3>Call</h3><p>A deal to <b>buy</b> at the strike. You want the price to go <b>up</b>.</p><div class="say">Sneaker: the deal above.</div></div>
+    <div class="card"><h3>Put</h3><p>A deal to <b>sell</b> at the strike. You want the price to go <b>down</b>.</p><div class="say">Sneaker: a deal to sell yours for $100 even if the price crashes.</div></div>
+  </div>
+  <div class="panel">
+    <h3>The one idea that explains everything</h3>
+    <div class="big"><em>Premium</em> = Real value + Hope value</div>
+    <div class="grid2">
+      <div><b style="color:var(--green)">Real value</b> (the pros say &ldquo;intrinsic value&rdquo;): how much the deal is worth if you used it <i>right now</i>. For a call: ETH price minus strike, but never less than $0.</div>
+      <div><b style="color:var(--gold2)">Hope value</b> (the pros say &ldquo;time value&rdquo;): the extra you pay for the <i>chance</i> that things get better before the deadline. It melts away as the deadline gets close.</div>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>Your real example, step by step</h3>
+    <ul class="clean">
+      <li>ETH costs <b>$2,487.30</b>. You look at a <b>call</b> with a <b>$2,500 strike</b> that ends <b>Dec 25</b>.</li>
+      <li>The seller asks <b>$229.70</b> for it. That is the premium.</li>
+      <li>$2,487.30 is <b>$12.70 below</b> the $2,500 locked-in price. Using the deal today would be silly, so the real value is <b>$0</b>. All $229.70 is hope value. We call this <b>out of the money</b> (traders also say &ldquo;at the money&rdquo; because it is so close).</li>
+      <li>To make a profit on Dec 25, ETH must finish above <b>$2,500 + $229.70 = $2,729.70</b>. That is about <b>9.7% higher</b> than today.</li>
+      <li>The most you can lose is the <b>$229.70</b> you paid. If you only buy 0.1 of a contract, that is <b>$22.97</b>.</li>
+      <li>Compare the <b>$2,300 call</b>: it costs <b>$342.70</b>. ETH is already $187.30 above $2,300, so that is real value, and the other $155.40 is hope value. It needs ETH above <b>$2,642.70</b> (about 6.2% higher). It costs more but needs a smaller jump.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="lab1">
+  <div class="step">Part 3 &middot; Tool</div>
+  <h2>Zones lab: in, out, or at the money?</h2>
+  <p class="lead">Type any numbers. The page tells you which zone you are in, splits the premium into real value and hope value, and draws where you win and lose.</p>
+  <div class="panel">
+    <div class="chips" id="l1-presets">
+      <button class="btn" data-t="call" data-k="2500" data-p="229.7">$2,500 call</button>
+      <button class="btn" data-t="call" data-k="2300" data-p="342.7">$2,300 call</button>
+      <button class="btn" data-t="call" data-k="2400" data-p="282.7">$2,400 call</button>
+      <button class="btn" data-t="put" data-k="2500" data-p="219.4">$2,500 put</button>
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="field"><label>Type of deal</label>
+          <div class="seg" id="l1-type" data-val="call"><button data-v="call" class="on">Call (price goes up)</button><button data-v="put">Put (price goes down)</button></div></div>
+        <div class="field"><label for="l1-spot">ETH price today</label><input type="number" id="l1-spot" value="2487.30" step="0.01" min="0"></div>
+        <div class="field"><label for="l1-strike">Strike (the locked-in price)</label><input type="number" id="l1-strike" value="2500" step="1" min="0"></div>
+        <div class="field"><label for="l1-prem">Premium (what you pay for 1 ETH)</label><input type="number" id="l1-prem" value="229.70" step="0.01" min="0"></div>
+        <div class="field"><label for="l1-size">How many ETH worth</label><input type="number" id="l1-size" value="1" step="0.1" min="0.01"><small>Try 0.1 to see a smaller bet.</small></div>
+        <div class="err" id="l1-err"></div>
+      </div>
+      <div>
+        <div style="margin-bottom:10px"><span id="l1-badge" class="badge otm">Out of the money</span></div>
+        <p id="l1-why" style="font-size:18px"></p>
+        <div class="split"><div class="bi" id="l1-bi"></div><div class="bt" id="l1-bt"></div></div>
+        <div class="legend"><span><i style="background:var(--green)"></i>Real value (intrinsic)</span><span><i style="background:var(--gold2)"></i>Hope value (time value)</span></div>
+        <p id="l1-split-txt" style="font-family:'DM Mono',monospace;font-size:14px;color:var(--muted)"></p>
+      </div>
+    </div>
+    <svg id="l1-zones" viewBox="0 0 700 150" role="img" aria-label="Number line showing where you lose your deposit, where the deal has value but no profit, and where you profit"></svg>
+    <div class="legend">
+      <span><i style="background:rgba(224,102,102,.55)"></i>You lose your whole premium</span>
+      <span><i style="background:rgba(240,198,76,.55)"></i>Deal has real value, but you are still down</span>
+      <span><i style="background:rgba(76,201,138,.6)"></i>Profit</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="k">Real value today</div><div class="v" id="l1-intr"></div><div class="h">What the deal is worth if used right now</div></div>
+      <div class="stat"><div class="k">Hope value</div><div class="v" id="l1-tv"></div><div class="h">Premium minus real value</div></div>
+      <div class="stat"><div class="k">Profit starts at</div><div class="v" id="l1-be"></div><div class="h" id="l1-move"></div></div>
+      <div class="stat"><div class="k">Most you can lose</div><div class="v neg" id="l1-max"></div><div class="h">The premium you paid</div></div>
+      <div class="stat"><div class="k">Best case</div><div class="v pos" id="l1-best"></div><div class="h" id="l1-best-h"></div></div>
+    </div>
+    <div style="margin-top:14px"><button class="btn" id="l1-send">Send these numbers to the Profit lab and Time lab</button></div>
+  </div>
+  <div class="note"><b>How the zones work:</b> for a <b>call</b>, you are &ldquo;in the money&rdquo; when ETH is <i>above</i> the strike. For a <b>put</b>, it is the opposite: &ldquo;in the money&rdquo; when ETH is <i>below</i> the strike. &ldquo;At the money&rdquo; just means ETH is sitting very close to the strike (this page counts within about 1%).</div>
+</section>
+
+<section id="lab2">
+  <div class="step">Part 4 &middot; Tool</div>
+  <h2>Profit lab: what happens on deadline day?</h2>
+  <p class="lead">Slide the ETH price on expiry day and watch your profit or loss. The chart is the &ldquo;payoff picture&rdquo; that traders use.</p>
+  <div class="panel">
+    <div class="grid2">
+      <div>
+        <div class="field"><label>Type of deal</label>
+          <div class="seg" id="l2-type" data-val="call"><button data-v="call" class="on">Call</button><button data-v="put">Put</button></div></div>
+        <div class="field"><label for="l2-strike">Strike</label><input type="number" id="l2-strike" value="2500" step="1" min="1"></div>
+        <div class="field"><label for="l2-prem">Premium per ETH</label><input type="number" id="l2-prem" value="229.70" step="0.01" min="0"></div>
+        <div class="field"><label for="l2-size">How many ETH worth</label><input type="number" id="l2-size" value="1" step="0.1" min="0.01"></div>
+        <div class="err" id="l2-err"></div>
+      </div>
+      <div>
+        <div class="field"><label for="l2-px">ETH price on deadline day: <span id="l2-pxout" style="color:var(--gold2)"></span></label>
+          <input type="range" id="l2-px" min="1500" max="3500" step="1" value="2487"></div>
+        <div class="big" id="l2-big"></div>
+        <p id="l2-status" style="text-align:center;color:var(--muted)"></p>
+      </div>
+    </div>
+    <svg id="l2-chart" viewBox="0 0 700 330" role="img" aria-label="Profit and loss chart by ETH price on expiry day"></svg>
+    <div class="stats">
+      <div class="stat"><div class="k">Profit starts at</div><div class="v" id="l2-be"></div><div class="h">Same no matter how many ETH you buy</div></div>
+      <div class="stat"><div class="k">Total you paid</div><div class="v" id="l2-cost"></div><div class="h">Also your most you can lose</div></div>
+      <div class="stat"><div class="k">Return on your deposit</div><div class="v" id="l2-ret"></div><div class="h">Profit or loss divided by what you paid</div></div>
+    </div>
+    <div class="note" id="l2-note"></div>
+  </div>
+</section>
+
+<section id="lab3">
+  <div class="step">Part 5 &middot; Tool</div>
+  <h2>Time lab: why prices move before the deadline</h2>
+  <p class="lead">You can sell your deal any time before it ends. So what makes its price go up or down along the way? Three things: the ETH price, the time left, and how wildly people expect ETH to swing.</p>
+  <div class="panel">
+    <div class="chips" id="l3-presets">
+      <button class="btn" data-d="76" data-v="50">Today: 76 days left</button>
+      <button class="btn" data-d="54" data-v="50">Nov 1: 54 days left</button>
+      <button class="btn" data-d="7" data-v="50">One week left</button>
+      <button class="btn" data-d="0" data-v="50">Deadline day</button>
+      <button class="btn" data-d="76" data-v="80">Big news (wild swings)</button>
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="field"><label>Type of deal</label>
+          <div class="seg" id="l3-type" data-val="call"><button data-v="call" class="on">Call</button><button data-v="put">Put</button></div></div>
+        <div class="field"><label for="l3-spot">ETH price today</label><input type="number" id="l3-spot" value="2487.30" step="0.01" min="1"></div>
+        <div class="field"><label for="l3-strike">Strike</label><input type="number" id="l3-strike" value="2500" step="1" min="1"></div>
+      </div>
+      <div>
+        <div class="field"><label for="l3-days">Days left: <span id="l3-daysout" style="color:var(--gold2)"></span></label><input type="range" id="l3-days" min="0" max="120" step="1" value="76"></div>
+        <div class="field"><label for="l3-iv">Expected swings (&ldquo;implied volatility&rdquo;): <span id="l3-ivout" style="color:var(--gold2)"></span></label><input type="range" id="l3-iv" min="15" max="150" step="1" value="50"><small>Higher = traders expect ETH to jump around more.</small></div>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="k">Model price</div><div class="v" id="l3-price"></div><div class="h" id="l3-compare"></div></div>
+      <div class="stat"><div class="k">Real value</div><div class="v" id="l3-intr"></div><div class="h">Worth if used today</div></div>
+      <div class="stat"><div class="k">Hope value</div><div class="v" id="l3-tv"></div><div class="h">Shrinks toward $0 at the deadline</div></div>
+    </div>
+    <div class="grid2" style="margin-top:14px">
+      <div class="card"><h3>Delta: the follow rate</h3><div class="big" id="l3-delta" style="text-align:left"></div><p id="l3-delta-txt" style="font-size:16px;color:var(--muted)"></p></div>
+      <div class="card"><h3>Theta: the daily melt</h3><div class="big" id="l3-theta" style="text-align:left"></div><p id="l3-theta-txt" style="font-size:16px;color:var(--muted)"></p></div>
+      <div class="card"><h3>Vega: the swing boost</h3><div class="big" id="l3-vega" style="text-align:left"></div><p id="l3-vega-txt" style="font-size:16px;color:var(--muted)"></p></div>
+    </div>
+    <h3 style="margin-top:22px">Picture 1: option price vs. ETH price</h3>
+    <svg id="l3-chartA" viewBox="0 0 700 320" role="img" aria-label="Option price as ETH price changes, with the real value line and the slope at the current price"></svg>
+    <div class="legend"><span><i style="background:var(--gold2)"></i>Option price today</span><span><i style="background:var(--green)"></i>Real value only (the &ldquo;hockey stick&rdquo;)</span><span><i style="background:#fff"></i>Slope at today&rsquo;s ETH price = delta</span></div>
+    <p style="color:var(--muted);font-size:16px">The gap between the gold curve and the green hockey stick is the hope value. It is biggest when the ETH price is close to the strike.</p>
+    <h3 style="margin-top:22px">Picture 2: option price as the deadline gets closer</h3>
+    <svg id="l3-chartB" viewBox="0 0 700 320" role="img" aria-label="Option price over time if ETH stays where it is, melting toward real value at the deadline"></svg>
+    <div class="legend"><span><i style="background:var(--gold2)"></i>Option price if ETH does not move</span><span><i style="background:var(--green)"></i>Real value</span></div>
+    <p style="color:var(--muted);font-size:16px">Time passing never adds value. It only melts the hope value, and the melting speeds up near the end.</p>
+    <div class="note"><b>Heads up:</b> this page uses a classic textbook formula (called Black-Scholes) in a simplified form. It gets close to Derive&rsquo;s prices but will not match exactly. Real prices come from the order book on Derive.</div>
+  </div>
+</section>
+
+<section id="chain">
+  <div class="step">Part 6 &middot; Tool</div>
+  <h2>Real prices: reading the Derive chain</h2>
+  <p class="lead">These are the actual Dec 25 prices from your Derive screen on Oct 9. The page adds the zone, real value, hope value, and profit line for each one.</p>
+  <div class="panel">
+    <div class="grid2">
+      <div class="field"><label>Show</label><div class="seg" id="ch-type" data-val="call"><button data-v="call" class="on">Calls</button><button data-v="put">Puts</button></div></div>
+      <div class="field"><label for="ch-spot">Pretend ETH is at</label><input type="number" id="ch-spot" value="2487.30" step="0.01" min="1"><small><button class="btn" id="ch-reset" style="margin-top:6px">Reset to $2,487.30</button></small></div>
+    </div>
+    <div class="tblwrap"><table id="ch-table"></table></div>
+    <p style="color:var(--muted);font-size:15px;margin-top:10px">&ldquo;You pay&rdquo; is the <b>ask</b> price, what a seller wants. &ldquo;You get&rdquo; is the <b>bid</b>, what a buyer offers. The small gap between them is the cost of buying and instantly selling. The prices here are frozen from the screenshot. Changing the ETH price only changes the labels, not the prices. The Time lab shows how prices move.</p>
+    <p style="color:var(--muted);font-size:15px">Tap a row&rsquo;s button to load that option into all the labs above.</p>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="step">Part 7</div>
+  <h2>Check yourself</h2>
+  <p class="lead">Nine questions. Tap an answer to see why. Wrong answers are how you learn.</p>
+  <div id="quiz-box"></div>
+  <div class="panel" style="text-align:center"><div class="score" id="quiz-score">Score: 0 / 9</div><button class="btn" id="quiz-reset">Try again</button></div>
+</section>
+
+<section id="cheat">
+  <div class="step">Part 8</div>
+  <h2>Cheat sheet</h2>
+  <div class="grid2">
+    <div class="panel">
+      <h3>The formulas</h3>
+      <div class="formula"><b>Call real value</b> = ETH price &minus; strike (never below $0)</div>
+      <div class="formula"><b>Put real value</b> = strike &minus; ETH price (never below $0)</div>
+      <div class="formula"><b>Hope value</b> = premium &minus; real value</div>
+      <div class="formula"><b>Call profit starts at</b> = strike + premium</div>
+      <div class="formula"><b>Put profit starts at</b> = strike &minus; premium</div>
+      <div class="formula"><b>Most you can lose</b> = premium &times; how many you bought</div>
+    </div>
+    <div class="panel">
+      <h3>Mistakes to avoid</h3>
+      <ul class="clean">
+        <li><b>&ldquo;Buying less lowers my profit price.&rdquo;</b> No. The profit price is a price level. Buying 0.1 instead of 1 only changes the dollars won or lost.</li>
+        <li><b>&ldquo;Time helps me.&rdquo;</b> No. As a buyer, time only melts hope value. Price moves and bigger expected swings are what raise the price.</li>
+        <li><b>&ldquo;In the money means profit.&rdquo;</b> Not always. You also paid a premium, so you may be in the money and still down.</li>
+        <li><b>Wrong date.</b> Always check the expiry on the order ticket. A $2,500 call expiring in 3 days is a very different deal than one expiring Dec 25.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>Greeks in one line each</h3>
+      <ul class="clean">
+        <li><b>Delta:</b> how many dollars the option moves when ETH moves $1.</li>
+        <li><b>Theta:</b> how many dollars it melts per day.</li>
+        <li><b>Vega:</b> how many dollars it gains if expected swings rise by one point.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>How Derive works</h3>
+      <ul class="clean">
+        <li>Options are <b>European-style</b>: the deal is settled on the deadline, but you can <b>sell any time</b> on the order book.</li>
+        <li>They end at <b>8:00 a.m. UTC</b> and settle to an average ETH price over the last 30 minutes, paid in USDC.</li>
+        <li><b>Buying</b> an option risks only the premium. <b>Selling</b> an option can lose much more and needs margin (collateral). Beginners should stick to buying.</li>
+        <li>Derive has said it is not available to US customers. Check the rules where you live before connecting a wallet.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><div class="wrap">Educational only. This is not financial advice. Options can lose 100% of the premium. Prices come from a Derive screenshot taken Oct 9, 2026 and change constantly. Check live prices and your local rules before you ever trade. &copy; Block Wall Street</div></footer>
+
+<script>
+(function(){
+var $=function(id){return document.getElementById(id);};
+function usd(n,d){if(d===undefined)d=2;if(!isFinite(n))return '-';var s=Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});return (n<0?'-$':'$')+s;}
+function signed(n,d){return (n>0?'+':'')+usd(n,d);}
+function num(id){return parseFloat($(id).value);}
+var NS='http://www.w3.org/2000/svg';
+function el(tag,attrs,text){var e=document.createElementNS(NS,tag);for(var k in attrs){e.setAttribute(k,attrs[k]);}if(text!==undefined)e.textContent=text;return e;}
+function setSeg(id,v){var b=$(id).querySelectorAll('button');for(var i=0;i<b.length;i++){b[i].classList.toggle('on',b[i].getAttribute('data-v')===v);}$(id).setAttribute('data-val',v);}
+function getSeg(id){return $(id).getAttribute('data-val');}
+function wireSeg(id,cb){var b=$(id).querySelectorAll('button');for(var i=0;i<b.length;i++){(function(btn){btn.addEventListener('click',function(){var v=btn.getAttribute('data-v');setSeg(id,v);cb(v);});})(b[i]);}}
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function niceTicks(a,b,n){var range=b-a;var raw=range/n;var mag=Math.pow(10,Math.floor(Math.log10(raw)));var norm=raw/mag;var step=(norm<1.5?1:norm<3?2:norm<7?5:10)*mag;var out=[];for(var v=Math.ceil(a/step-1e-9)*step;v<=b+1e-9;v+=step){out.push(Math.round(v/step)*step);}return out;}
+function status(call,S,K){var diff=call?S-K:K-S;var tol=0.01*K;if(diff>tol)return {cls:'itm',label:'In the money',diff:diff};if(diff<-tol)return {cls:'otm',label:'Out of the money',diff:diff};return {cls:'atm',label:'At the money',diff:diff};}
+
+/* ---------- math for the Time lab ---------- */
+function ncdf(x){var t=1/(1+0.2316419*Math.abs(x));var d=0.3989423*Math.exp(-x*x/2);var p=d*t*(0.3193815+t*(-0.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));return x>0?1-p:p;}
+function npdf(x){return 0.3989423*Math.exp(-x*x/2);}
+function bs(type,S,K,days,ivPct){
+  var T=days/365,sig=ivPct/100;
+  var intr=type==='call'?Math.max(0,S-K):Math.max(0,K-S);
+  if(T<=0||sig<=0){var dd=type==='call'?(S>K?1:0):(S<K?-1:0);return {price:intr,intr:intr,delta:dd,theta:0,vega:0};}
+  var sq=sig*Math.sqrt(T);
+  var d1=(Math.log(S/K)+0.5*sig*sig*T)/sq;var d2=d1-sq;
+  var price,delta;
+  if(type==='call'){price=S*ncdf(d1)-K*ncdf(d2);delta=ncdf(d1);}else{price=K*ncdf(-d2)-S*ncdf(-d1);delta=ncdf(d1)-1;}
+  var theta=-S*npdf(d1)*sig/(2*Math.sqrt(T))/365;
+  var vega=S*npdf(d1)*Math.sqrt(T)/100;
+  return {price:price,intr:intr,delta:delta,theta:theta,vega:vega};
+}
+
+/* ---------- chart helper ---------- */
+function mkChart(svg,o){
+  var W=700,H=o.h||320,L=70,R=22,T=22,B=46;
+  svg.setAttribute('viewBox','0 0 '+W+' '+H);svg.innerHTML='';
+  var xs=o.xRev?function(p){return L+(o.hi-p)/(o.hi-o.lo)*(W-L-R);}:function(p){return L+(p-o.lo)/(o.hi-o.lo)*(W-L-R);};
+  var ys=function(v){return T+(o.yMax-v)/(o.yMax-o.yMin)*(H-T-B);};
+  var defs=el('defs',{});var cp=el('clipPath',{id:o.clipId});cp.appendChild(el('rect',{x:L,y:T,width:W-L-R,height:H-T-B}));defs.appendChild(cp);svg.appendChild(defs);
+  niceTicks(o.yMin,o.yMax,5).forEach(function(v){
+    svg.appendChild(el('line',{x1:L,x2:W-R,y1:ys(v),y2:ys(v),'class':v===0?'ax0':'grid'}));
+    svg.appendChild(el('text',{x:L-8,y:ys(v)+4,'text-anchor':'end','class':'sv-m'},o.yFmt(v)));
+  });
+  (o.xTicks||niceTicks(o.lo,o.hi,6)).forEach(function(v){
+    svg.appendChild(el('line',{x1:xs(v),x2:xs(v),y1:H-B,y2:H-B+5,'class':'tick'}));
+    svg.appendChild(el('text',{x:xs(v),y:H-B+20,'text-anchor':'middle','class':'sv-m'},o.xFmt(v)));
+  });
+  svg.appendChild(el('text',{x:(L+W-R)/2,y:H-6,'text-anchor':'middle','class':'sv-m'},o.xTitle||''));
+  var g=el('g',{'clip-path':'url(#'+o.clipId+')'});svg.appendChild(g);
+  return {xs:xs,ys:ys,g:g,W:W,H:H,L:L,R:R,T:T,B:B};
+}
+function fmtY(step){return function(v){return usd(v,Math.abs(v)<10&&v!==0?2:0);};}
+
+/* ---------- Story: sneaker ---------- */
+function sneaker(){
+  var p=parseInt($('sn-px').value,10);var locked=100,dep=10;
+  var big=$('sn-big'),txt=$('sn-txt');
+  if(p<=locked){
+    big.innerHTML='Sneaker: <em>$'+p+'</em> &rarr; skip the deal, lose <span style="color:var(--red)">$10</span>';
+    txt.textContent='The store sells it for $'+p+', which is not more than your locked-in $100. Buying with your deal would be silly. You walk away and only lose the $10 deposit.';
+  }else{
+    var save=p-locked,net=save-dep;
+    big.innerHTML='Sneaker: <em>$'+p+'</em> &rarr; '+(net>=0?'profit ':'loss ')+'<span style="color:'+(net>=0?'var(--green)':'var(--red)')+'">'+(net>=0?'+':'-')+'$'+Math.abs(net)+'</span>';
+    txt.textContent='You use your deal and pay $100 instead of $'+p+'. That saves $'+save+', minus your $10 deposit = '+(net>=0?'+':'-')+'$'+Math.abs(net)+'.'+(net<0?' You used the deal, but you are still down because the deposit was bigger than your savings.':'');
+  }
+}
+
+/* ---------- Lab 1 ---------- */
+function zones(svg,type,S,K,P){
+  svg.innerHTML='';
+  var call=type==='call',be=call?K+P:K-P;
+  var pts=[S,K,be];var lo=Math.min.apply(null,pts),hi=Math.max.apply(null,pts);
+  var pad=Math.max((hi-lo)*0.35,hi*0.04);lo=Math.max(0,lo-pad);hi=hi+pad;
+  var x=function(p){return 40+(p-lo)/(hi-lo)*620;};
+  var defs=[
+    call?[lo,K,'rgba(224,102,102,.38)','Lose premium']:[K,hi,'rgba(224,102,102,.38)','Lose premium'],
+    call?[K,be,'rgba(240,198,76,.38)','Value, but still down']:[be,K,'rgba(240,198,76,.38)','Value, but still down'],
+    call?[be,hi,'rgba(76,201,138,.42)','Profit']:[lo,be,'rgba(76,201,138,.42)','Profit']
+  ];
+  defs.forEach(function(z){
+    var a=Math.max(lo,Math.min(z[0],z[1])),b=Math.min(hi,Math.max(z[0],z[1]));
+    if(b-a<=0)return;
+    var w=x(b)-x(a);
+    svg.appendChild(el('rect',{x:x(a),y:48,width:w,height:36,fill:z[2]}));
+    if(w>z[3].length*7.4+8)svg.appendChild(el('text',{x:x(a)+w/2,y:70,'text-anchor':'middle','class':'sv-t'},z[3]));
+  });
+  svg.appendChild(el('rect',{x:40,y:48,width:620,height:36,fill:'none',stroke:'rgba(212,175,55,.4)'}));
+  var xs=x(S),xk=x(K),xb=x(be);
+  svg.appendChild(el('line',{x1:xs,x2:xs,y1:36,y2:92,stroke:'#F0C64C','stroke-width':2.5}));
+  svg.appendChild(el('text',{x:clamp(xs,110,590),y:28,'text-anchor':'middle','class':'sv-g'},'ETH today '+usd(S)));
+  svg.appendChild(el('line',{x1:xk,x2:xk,y1:48,y2:100,stroke:'#E8ECF5','stroke-width':1.5,'stroke-dasharray':'4 3'}));
+  var kAnchor=call?'end':'start';if(kAnchor==='end'&&xk<150)kAnchor='start';if(kAnchor==='start'&&xk>550)kAnchor='end';
+  svg.appendChild(el('text',{x:xk,y:114,'text-anchor':kAnchor,'class':'sv-t'},'Strike '+usd(K)));
+  if(be>lo&&be<hi){
+    svg.appendChild(el('line',{x1:xb,x2:xb,y1:84,y2:124,stroke:'#4CC98A','stroke-width':1.5}));
+    svg.appendChild(el('circle',{cx:xb,cy:84,r:4,fill:'#4CC98A'}));
+    var bAnchor=xb>520?'end':'start';
+    svg.appendChild(el('text',{x:xb+(bAnchor==='end'?-6:6),y:136,'text-anchor':bAnchor,'class':'sv-t'},'Profit starts '+usd(be)));
+  }
+}
+function lab1(){
+  var type=getSeg('l1-type'),S=num('l1-spot'),K=num('l1-strike'),P=num('l1-prem'),N=num('l1-size');
+  var err=$('l1-err');
+  if(!(S>0&&K>0&&P>=0&&N>0)){err.textContent='Please enter positive numbers (the premium can be 0 or more).';return;}
+  err.textContent='';
+  var call=type==='call';
+  var st=status(call,S,K),diff=st.diff;
+  var intr=Math.max(0,diff),tv=P-intr;
+  var b=$('l1-badge');b.className='badge '+st.cls;b.textContent=st.label;
+  var why;
+  if(diff>0){why=call?'ETH is '+usd(diff)+' above your locked-in price. Your deal lets you buy at '+usd(K)+' while everyone else pays '+usd(S)+'. That '+usd(diff)+' is real value already inside your deal.':'ETH is '+usd(diff)+' below your locked-in price. Your deal lets you sell at '+usd(K)+' while everyone else only gets '+usd(S)+'. That '+usd(diff)+' is real value already inside your deal.';}
+  else if(diff<0){why=call?'ETH is '+usd(-diff)+' below your locked-in price. Using the deal today would mean paying more than the market, so its real value is $0. The whole '+usd(P)+' is hope value: you are paying for the chance ETH climbs before the deadline.':'ETH is '+usd(-diff)+' above your locked-in price. Selling at '+usd(K)+' today would be worse than the market, so its real value is $0. The whole '+usd(P)+' is hope value: you are paying for the chance ETH falls before the deadline.';}
+  else{why='ETH is exactly at your locked-in price, so the real value is $0.';}
+  if(st.cls==='atm'&&diff!==0){why+=' This is so close to the strike that traders call it at the money, even though it is technically '+(diff>0?'in':'out of')+' the money.';}
+  $('l1-why').textContent=why;
+  var bi=$('l1-bi'),bt=$('l1-bt');
+  if(P>0&&tv>=0){var ip=clamp(intr/P*100,0,100);bi.style.width=ip+'%';bt.style.width=(100-ip)+'%';bi.textContent=ip>=14?'Real '+Math.round(ip)+'%':'';bt.textContent=(100-ip)>=14?'Hope '+Math.round(100-ip)+'%':'';$('l1-split-txt').textContent='Real value '+usd(intr)+'  +  Hope value '+usd(tv)+'  =  Premium '+usd(P);}
+  else if(P>0){bi.style.width='100%';bt.style.width='0%';bi.textContent='';bt.textContent='';$('l1-split-txt').textContent='The premium is lower than the real value. Real prices almost never do this, so double-check your numbers.';}
+  else{bi.style.width='0%';bt.style.width='0%';$('l1-split-txt').textContent='Premium is $0.';}
+  var be=call?K+P:K-P;
+  $('l1-intr').textContent=usd(intr);$('l1-tv').textContent=usd(tv);
+  $('l1-be').textContent=be>0?usd(be):'never';
+  var mv=$('l1-move');
+  if(be<=0){mv.textContent='The premium is bigger than the strike, so this put cannot profit.';}
+  else if((call&&S>=be)||(!call&&S<=be)){mv.textContent='ETH is already past this price.';}
+  else{var pc=(be/S-1)*100;mv.textContent='ETH needs to move '+(pc>0?'up ':'down ')+Math.abs(pc).toFixed(1)+'% from today.';}
+  $('l1-max').textContent=usd(P*N);
+  if(call){$('l1-best').textContent='No limit';$('l1-best-h').textContent='A call can keep gaining as ETH climbs.';}
+  else{var mp=(K-P)*N;$('l1-best').textContent=mp>0?usd(mp):'$0';$('l1-best-h').textContent='If ETH fell all the way to $0.';}
+  zones($('l1-zones'),type,S,K,P);
+}
+
+/* ---------- Lab 2 ---------- */
+function lab2(resetPx){
+  var type=getSeg('l2-type'),K=num('l2-strike'),P=num('l2-prem'),N=num('l2-size');
+  var err=$('l2-err');
+  if(!(K>0&&P>=0&&N>0)){err.textContent='Please enter positive numbers (the premium can be 0 or more).';return;}
+  err.textContent='';
+  var call=type==='call';
+  var lo=Math.round(K*0.6),hi=Math.round(K*1.4);
+  var sl=$('l2-px');sl.min=lo;sl.max=hi;
+  if(resetPx!==undefined)sl.value=clamp(Math.round(resetPx),lo,hi);
+  var px=parseFloat(sl.value);if(px<lo||px>hi){px=clamp(px,lo,hi);sl.value=px;}
+  function pl(p){return N*((call?Math.max(0,p-K):Math.max(0,K-p))-P);}
+  var be=call?K+P:K-P;
+  var v=pl(px);
+  $('l2-pxout').textContent=usd(px,0);
+  var big=$('l2-big');
+  big.innerHTML=(v>0?'You make ':v<0?'You lose ':'You break even: ')+'<span class="'+(v>0?'g':'')+'" style="'+(v<0?'color:var(--red)':'')+'">'+usd(Math.abs(v))+'</span>';
+  var st=status(call,px,K);
+  $('l2-status').textContent='On deadline day this deal is '+st.label.toLowerCase()+'. Real value then: '+usd(Math.max(0,call?px-K:K-px))+' per ETH (hope value is $0 on deadline day).';
+  $('l2-be').textContent=be>0?usd(be):'never';
+  $('l2-cost').textContent=usd(P*N);
+  var r=P*N>0?v/(P*N)*100:0;
+  var re=$('l2-ret');re.textContent=(r>0?'+':'')+r.toFixed(0)+'%';re.className='v '+(v>0?'pos':v<0?'neg':'');
+  $('l2-note').innerHTML='<b>Size changes dollars, not the profit price.</b> With '+N+' ETH worth you risk '+usd(P*N)+' in total, but you still need ETH '+(call?'above ':'below ')+usd(be)+' to profit. If you buy less, you win less and lose less at the exact same prices.';
+  var maxLoss=P*N;
+  var maxProf=call?pl(hi):pl(lo);
+  var yMax=Math.max(maxProf*1.1,maxLoss*0.6),yMin=-maxLoss*1.35;
+  var ch=mkChart($('l2-chart'),{lo:lo,hi:hi,yMin:yMin,yMax:yMax,clipId:'cp2',yFmt:fmtY(),xFmt:function(v){return usd(v,0);},xTitle:'ETH price on deadline day'});
+  var xsArr=[lo,K,hi];if(be>lo&&be<hi)xsArr.push(be);xsArr.sort(function(a,b){return a-b;});
+  var pts=xsArr.map(function(p){return [p,pl(p)];});
+  for(var i=0;i<pts.length-1;i++){
+    var a=pts[i],b=pts[i+1];var mid=(a[1]+b[1])/2;if(Math.abs(a[1])<1e-9&&Math.abs(b[1])<1e-9)continue;
+    var poly=ch.xs(a[0])+','+ch.ys(0)+' '+ch.xs(a[0])+','+ch.ys(a[1])+' '+ch.xs(b[0])+','+ch.ys(b[1])+' '+ch.xs(b[0])+','+ch.ys(0);
+    ch.g.appendChild(el('polygon',{points:poly,fill:mid>0?'rgba(76,201,138,.28)':'rgba(224,102,102,.28)'}));
+  }
+  ch.g.appendChild(el('polyline',{points:pts.map(function(p){return ch.xs(p[0])+','+ch.ys(p[1]);}).join(' '),fill:'none',stroke:'#F0C64C','stroke-width':3,'stroke-linejoin':'round'}));
+  var svg=$('l2-chart');
+  svg.appendChild(el('line',{x1:ch.xs(K),x2:ch.xs(K),y1:ch.T,y2:ch.H-ch.B,stroke:'rgba(232,236,245,.5)','stroke-width':1.2,'stroke-dasharray':'4 3'}));
+  svg.appendChild(el('text',{x:ch.xs(K)+(call?-6:6),y:ch.T+14,'text-anchor':call?'end':'start','class':'sv-t'},'Strike '+usd(K,0)));
+  if(be>lo&&be<hi){
+    svg.appendChild(el('circle',{cx:ch.xs(be),cy:ch.ys(0),r:6,fill:'#0A1128',stroke:'#4CC98A','stroke-width':2.5}));
+    svg.appendChild(el('text',{x:ch.xs(be)+(call?8:-8),y:ch.ys(0)+20,'text-anchor':call?'start':'end','class':'sv-t'},'Profit starts '+usd(be)));
+  }
+  svg.appendChild(el('line',{x1:ch.xs(px),x2:ch.xs(px),y1:ch.T,y2:ch.H-ch.B,stroke:'#fff','stroke-width':1.5,'stroke-dasharray':'2 3'}));
+  svg.appendChild(el('circle',{cx:ch.xs(px),cy:ch.ys(v),r:7,fill:v>=0?'#4CC98A':'#E06666',stroke:'#0A1128','stroke-width':2}));
+  var lx=clamp(ch.xs(px),150,ch.W-ch.R-100);
+  svg.appendChild(el('text',{x:lx,y:ch.T+14,'text-anchor':'middle','class':'sv-g'},usd(px,0)+' = '+signed(v)));
+}
+
+/* ---------- Lab 3 ---------- */
+function lab3(){
+  var type=getSeg('l3-type'),S=num('l3-spot'),K=num('l3-strike'),days=parseFloat($('l3-days').value),iv=parseFloat($('l3-iv').value);
+  if(!(S>0&&K>0))return;
+  $('l3-daysout').textContent=days+' day'+(days===1?'':'s');
+  $('l3-ivout').textContent=iv+'%';
+  var r=bs(type,S,K,days,iv);var call=type==='call';
+  $('l3-price').textContent=usd(r.price);
+  $('l3-intr').textContent=usd(r.intr);
+  $('l3-tv').textContent=usd(r.price-r.intr);
+  $('l3-compare').textContent=(Math.abs(S-2487.3)<0.01&&K===2500&&call&&days>=76&&days<=77&&iv===50)?'Derive asked $229.70, so the model is close':'A simplified estimate';
+  $('l3-delta').textContent=r.delta.toFixed(2);
+  $('l3-delta-txt').textContent='If ETH moves $10, this option moves about '+usd(Math.abs(r.delta)*10)+(call?' the same way.':' the opposite way (a put gains when ETH falls).')+' It is also a rough guess at the chance of finishing in the money: about '+Math.round(Math.abs(r.delta)*100)+'%.';
+  $('l3-theta').textContent=usd(r.theta);
+  $('l3-theta-txt').textContent='If nothing else changes, this option melts by about '+usd(-r.theta)+' per day.';
+  $('l3-vega').textContent='+'+usd(r.vega);
+  $('l3-vega-txt').textContent='If traders expect swings to rise by 1 point (like 50% to 51%), the price rises about '+usd(r.vega)+'.';
+  /* chart A */
+  var lo=K*0.65,hi=K*1.35;var N=80,vals=[],mx=0;
+  for(var i=0;i<=N;i++){var s=lo+(hi-lo)*i/N;var p=bs(type,s,K,days,iv).price;vals.push([s,p]);if(p>mx)mx=p;}
+  var yMax=mx*1.08;
+  var A=mkChart($('l3-chartA'),{lo:lo,hi:hi,yMin:0,yMax:yMax,clipId:'cp3a',yFmt:fmtY(),xFmt:function(v){return usd(v,0);},xTitle:'ETH price'});
+  var intrPts=[[lo,call?0:K-lo],[K,0],[hi,call?hi-K:0]];
+  A.g.appendChild(el('polyline',{points:intrPts.map(function(p){return A.xs(p[0])+','+A.ys(p[1]);}).join(' '),fill:'none',stroke:'#4CC98A','stroke-width':2.5,'stroke-dasharray':'6 4'}));
+  A.g.appendChild(el('polyline',{points:vals.map(function(p){return A.xs(p[0])+','+A.ys(p[1]);}).join(' '),fill:'none',stroke:'#F0C64C','stroke-width':3}));
+  var w=0.14*K;var t1=r.price+r.delta*(-w),t2=r.price+r.delta*w;
+  A.g.appendChild(el('line',{x1:A.xs(S-w),y1:A.ys(t1),x2:A.xs(S+w),y2:A.ys(t2),stroke:'#fff','stroke-width':2}));
+  var svgA=$('l3-chartA');
+  svgA.appendChild(el('line',{x1:A.xs(K),x2:A.xs(K),y1:A.T,y2:A.H-A.B,stroke:'rgba(232,236,245,.4)','stroke-width':1.2,'stroke-dasharray':'4 3'}));
+  svgA.appendChild(el('text',{x:A.xs(K)+(call?-6:6),y:A.T+14,'text-anchor':call?'end':'start','class':'sv-t'},'Strike '+usd(K,0)));
+  svgA.appendChild(el('circle',{cx:A.xs(S),cy:A.ys(r.price),r:7,fill:'#F0C64C',stroke:'#0A1128','stroke-width':2}));
+  svgA.appendChild(el('text',{x:clamp(A.xs(S),130,A.W-A.R-90),y:A.ys(r.price)-14,'text-anchor':'middle','class':'sv-g'},'You are here '+usd(r.price)));
+  /* chart B */
+  var D=120;var vB=[],mxB=0;
+  for(var d=D;d>=0;d-=2){var pr=bs(type,S,K,d,iv).price;vB.push([d,pr]);if(pr>mxB)mxB=pr;}
+  var B=mkChart($('l3-chartB'),{lo:0,hi:D,xRev:true,yMin:0,yMax:Math.max(mxB,r.intr,1)*1.1,clipId:'cp3b',yFmt:fmtY(),xFmt:function(v){return String(v);},xTicks:[120,90,60,30,0],xTitle:'Days left (deadline on the right)'});
+  B.g.appendChild(el('line',{x1:B.L,x2:B.W-B.R,y1:B.ys(r.intr),y2:B.ys(r.intr),stroke:'#4CC98A','stroke-width':2.5,'stroke-dasharray':'6 4'}));
+  B.g.appendChild(el('polyline',{points:vB.map(function(p){return B.xs(p[0])+','+B.ys(p[1]);}).join(' '),fill:'none',stroke:'#F0C64C','stroke-width':3}));
+  $('l3-chartB').appendChild(el('circle',{cx:B.xs(days),cy:B.ys(r.price),r:7,fill:'#F0C64C',stroke:'#0A1128','stroke-width':2}));
+  $('l3-chartB').appendChild(el('text',{x:clamp(B.xs(days),120,B.W-B.R-90),y:B.ys(r.price)-14,'text-anchor':'middle','class':'sv-g'},'Now: '+usd(r.price)));
+}
+
+/* ---------- Chain ---------- */
+var CHAIN={
+  call:[[2100,471.7,483.4],[2200,397.6,409.2],[2300,330.6,342.7],[2400,277.3,282.7],[2500,226.3,229.7],[2600,183.4,186.5],[2800,119.4,121.9],[3000,78,82.7]],
+  put:[[2100,69.1,73.3],[2200,95,98.7],[2300,127,130.8],[2400,166.8,171.3],[2500,214.5,219.4],[2600,269.6,277.2],[2800,402.5,412.1],[3000,559.2,571.9]]
+};
+function chain(){
+  var type=getSeg('ch-type'),S=num('ch-spot'),call=type==='call';
+  if(!(S>0))return;
+  var rows=CHAIN[type],near=0,best=1e9;
+  rows.forEach(function(r,i){var d=Math.abs(r[0]-S);if(d<best){best=d;near=i;}});
+  var h='<tr><th>Strike</th><th>Zone</th><th>You get (bid)</th><th>You pay (ask)</th><th>Real value</th><th>Hope value</th><th>Profit starts at</th><th></th></tr>';
+  rows.forEach(function(r,i){
+    var K=r[0],bid=r[1],ask=r[2];var st=status(call,S,K);var intr=Math.max(0,st.diff);var tv=ask-intr;var be=call?K+ask:K-ask;
+    h+='<tr'+(i===near?' class="near"':'')+'><td>'+usd(K,0)+'</td><td><span class="badge '+st.cls+'" style="font-size:12px;padding:3px 10px">'+st.label+'</span></td><td>'+usd(bid)+'</td><td>'+usd(ask)+'</td><td style="color:var(--green)">'+usd(intr)+'</td><td style="color:var(--gold2)">'+usd(tv)+'</td><td>'+usd(be)+'</td><td><button class="btn" data-k="'+K+'" data-p="'+ask+'">Load</button></td></tr>';
+  });
+  $('ch-table').innerHTML=h;
+  var btns=$('ch-table').querySelectorAll('button[data-k]');
+  for(var i=0;i<btns.length;i++){(function(b){b.addEventListener('click',function(){loadOption(type,parseFloat(b.getAttribute('data-k')),parseFloat(b.getAttribute('data-p')),S);});})(btns[i]);}
+}
+function loadOption(type,K,ask,S){
+  setSeg('l1-type',type);$('l1-strike').value=K;$('l1-prem').value=ask;$('l1-spot').value=S;$('l1-size').value=1;
+  setSeg('l2-type',type);$('l2-strike').value=K;$('l2-prem').value=ask;$('l2-size').value=1;
+  setSeg('l3-type',type);$('l3-spot').value=S;$('l3-strike').value=K;
+  lab1();lab2(S);lab3();
+  $('lab1').scrollIntoView({behavior:'smooth'});
+}
+
+/* ---------- Quiz ---------- */
+var QZ=[
+ {q:'ETH is $2,474 and you hold a call with a $2,500 strike. What zone is it in?',o:['In the money','Out of the money','Already expired'],a:1,w:'A call is in the money only when ETH is above the strike. $2,474 is below $2,500, so the real value is $0.'},
+ {q:'A call has a $2,500 strike and costs $229 (premium). At what ETH price on the deadline do you start making a profit?',o:['$2,271','$2,500','$2,729','$229'],a:2,w:'Strike + premium = $2,500 + $229 = $2,729. Below that you are still down, even above $2,500.'},
+ {q:'You buy only 0.1 of that same contract. What is your profit price now?',o:['Still $2,729 (strike + premium per ETH)','$2,522.90','$2,500'],a:0,w:'The profit price is a price level. A smaller size only shrinks the dollars you can win or lose. Your total premium would be about $22.90 instead of $229.'},
+ {q:'ETH is $2,487.30 and a $2,300 call costs $342.70. How much of that is hope value (time value)?',o:['$342.70','$187.30','$155.40','$0'],a:2,w:'Real value is 2,487.30 - 2,300 = $187.30. Hope value is the rest: 342.70 - 187.30 = $155.40.'},
+ {q:'ETH does not move. What can still make your option more expensive?',o:['Another week passing','Traders expecting bigger swings (implied volatility rises)','The deadline getting closer'],a:1,w:'Bigger expected swings make the chance of a big payoff larger, so buyers pay more. Time passing only melts hope value.'},
+ {q:'If nothing else changes, what happens to hope value as the deadline gets closer?',o:['It melts toward $0','It grows','It stays the same'],a:0,w:'On deadline day only real value is left. This melting is called theta, and it speeds up near the end.'},
+ {q:'An option has a delta of 0.55. What does that roughly mean?',o:['The option costs 55 cents','If ETH rises $1, the option gains about 55 cents','There is a 55% fee'],a:1,w:'Delta is the follow rate. It is also a rough guess at the chance of finishing in the money.'},
+ {q:'Can you cash out before Dec 25?',o:['No, only on the deadline','Only on deadline day','Yes, sell it on the order book at the bid price'],a:2,w:'Derive options are settled at the deadline, but you can sell any time. The price you get includes whatever hope value is left, and you receive the bid.'},
+ {q:'ETH is $2,487.30. What zone is a put with a $2,600 strike in?',o:['Out of the money','In the money by $112.70','At the money'],a:1,w:'A put gains when ETH is below the strike. $2,600 - $2,487.30 = $112.70 of real value, so it is in the money.'}
+];
+var qDone=[],qScore=0;
+function quiz(){
+  var box=$('quiz-box');box.innerHTML='';qDone=[];qScore=0;$('quiz-score').textContent='Score: 0 / '+QZ.length;
+  QZ.forEach(function(item,qi){
+    var d=document.createElement('div');d.className='q';
+    var t=document.createElement('div');t.className='qt';t.textContent=(qi+1)+'. '+item.q;d.appendChild(t);
+    var why=document.createElement('div');why.className='why';
+    var btns=[];
+    item.o.forEach(function(txt,oi){
+      var b=document.createElement('button');b.className='opt';b.textContent=txt;
+      b.addEventListener('click',function(){
+        if(qDone[qi])return;qDone[qi]=true;
+        btns.forEach(function(x,xi){x.disabled=true;if(xi===item.a)x.classList.add('right');});
+        if(oi===item.a){qScore++;why.textContent='Correct! '+item.w;}else{b.classList.add('wrong');why.textContent='Not quite. '+item.w;}
+        $('quiz-score').textContent='Score: '+qScore+' / '+QZ.length;
+      });
+      btns.push(b);d.appendChild(b);
+    });
+    d.appendChild(why);box.appendChild(d);
+  });
+}
+
+/* ---------- wiring ---------- */
+$('sn-px').addEventListener('input',sneaker);
+wireSeg('l1-type',lab1);
+['l1-spot','l1-strike','l1-prem','l1-size'].forEach(function(id){$(id).addEventListener('input',lab1);});
+var pre1=$('l1-presets').querySelectorAll('button');
+for(var i=0;i<pre1.length;i++){(function(b){b.addEventListener('click',function(){setSeg('l1-type',b.getAttribute('data-t'));$('l1-strike').value=b.getAttribute('data-k');$('l1-prem').value=b.getAttribute('data-p');lab1();});})(pre1[i]);}
+$('l1-send').addEventListener('click',function(){
+  var t=getSeg('l1-type'),S=num('l1-spot'),K=num('l1-strike'),P=num('l1-prem'),N=num('l1-size');
+  if(!(S>0&&K>0&&P>=0&&N>0))return;
+  setSeg('l2-type',t);$('l2-strike').value=K;$('l2-prem').value=P;$('l2-size').value=N;
+  setSeg('l3-type',t);$('l3-spot').value=S;$('l3-strike').value=K;
+  lab2(S);lab3();$('lab2').scrollIntoView({behavior:'smooth'});
+});
+wireSeg('l2-type',function(){lab2();});
+$('l2-strike').addEventListener('input',function(){var k=num('l2-strike');if(k>0)lab2(k);});
+['l2-prem','l2-size'].forEach(function(id){$(id).addEventListener('input',function(){lab2();});});
+$('l2-px').addEventListener('input',function(){lab2();});
+wireSeg('l3-type',lab3);
+['l3-spot','l3-strike','l3-days','l3-iv'].forEach(function(id){$(id).addEventListener('input',lab3);});
+var pre3=$('l3-presets').querySelectorAll('button');
+for(var j=0;j<pre3.length;j++){(function(b){b.addEventListener('click',function(){$('l3-days').value=b.getAttribute('data-d');$('l3-iv').value=b.getAttribute('data-v');lab3();});})(pre3[j]);}
+wireSeg('ch-type',chain);
+$('ch-spot').addEventListener('input',chain);
+$('ch-reset').addEventListener('click',function(){$('ch-spot').value='2487.30';chain();});
+$('quiz-reset').addEventListener('click',quiz);
+
+sneaker();lab1();lab2(2487);lab3();chain();quiz();
+})();
+</script>
+</body>
+</html>
